@@ -4,7 +4,7 @@ class Quiz {
   int _currentQuestionIndex = -1;
   int _score = 0;
 
-  Quiz(this._questions, this._currentQuestionIndex, this._score){
+  Quiz(this._questions){
     _questions.shuffle();
   }
 

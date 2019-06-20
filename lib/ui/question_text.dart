@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 class QuestionText extends StatefulWidget {
   final String _question;
   final int _questionNumber;
-
-
-  QuestionText(this._question, this._questionNumber)
-  @override
+ @override
   State createState() => new QuestionTextState();
+
+  QuestionText(this._question, this._questionNumber);
 
 }
 
@@ -23,6 +22,17 @@ class QuestionTextState extends State<QuestionText> with SingleTickerProviderSta
   _fontSizeAnimation.addListener(()=>this.setState(() {}));
   _fontSizeAnimationController.forward();
  }
+
+ @override void dispose(){
+   _fontSizeAnimationController.dispose();
+   super.dispose();
+ }
+   void didUpdateWidget(QuestionText oldWidget){
+    super.didUpdateWidget(oldWidget);
+    _fontSizeAnimationController.reset();
+    _fontSizeAnimationController.forward();
+    
+  }
  @override
   Widget build(BuildContext context) {
     return new Material(
@@ -34,7 +44,7 @@ class QuestionTextState extends State<QuestionText> with SingleTickerProviderSta
               style: new TextStyle(fontSize: _fontSizeAnimation.value * 15)),
               
             ),
-          );
-    )
+          )
+    );
   }
 }
